@@ -19,6 +19,7 @@ jobs:
       - uses: docker://lpenz/ghaction-cmake:latest
         with:
           coverage: codecov
+          dependencies: libhidapi-dev
   valgrind:
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +27,7 @@ jobs:
       - uses: docker://lpenz/ghaction-cmake:latest
         with:
           ctestflags: '-D ExperimentalMemCheck'
+          dependencies: libhidapi-dev
   clang-sanitizers:
     name: build with clang -fsanitize
     strategy:
@@ -43,6 +45,7 @@ jobs:
         with:
           cc: clang
           cflags: ${{ matrix.cflags }}
+          dependencies: libhidapi-dev
   clang-format:
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +53,7 @@ jobs:
       - uses: docker://lpenz/ghaction-cmake:latest
         with:
           analyzer: clang-format
+          dependencies: libhidapi-dev
   clang-analyzers:
     runs-on: ubuntu-latest
     steps:
@@ -57,3 +61,4 @@ jobs:
       - uses: docker://lpenz/ghaction-cmake:latest
         with:
           analyzer: clang-tidy
+          dependencies: libhidapi-dev
